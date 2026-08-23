@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: hpcrms-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: HPCRMSDB
+      POSTGRES_USER: hpcrms_user
+      POSTGRES_PASSWORD: hpcrms_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - hpcrms_pg_data:/var/lib/postgresql
+
+volumes:
+  hpcrms_pg_data:

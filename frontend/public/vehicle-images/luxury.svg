@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240">
+  
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#141414"/>
+      <stop offset="55%" stop-color="#050505"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#DCE9F5"/>
+      <stop offset="100%" stop-color="#A9C3DD"/>
+    </linearGradient>
+    <radialGradient id="shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00000030"/>
+      <stop offset="100%" stop-color="#00000000"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="240" fill="#EAF0F7"/>
+  <rect x="0" y="190" width="400" height="8" fill="#D6E0EC"/>
+  
+  
+    <ellipse cx="120" cy="200" rx="30" ry="6" fill="url(#shadow)"/>
+    <circle cx="120" cy="174" r="22" fill="#1C222C"/>
+    <circle cx="120" cy="174" r="13.64" fill="#8C97A6"/>
+    <line x1="120" y1="174" x2="133.2" y2="174.0" stroke="#3A4250" stroke-width="2.5"/><line x1="120" y1="174" x2="126.6" y2="185.4" stroke="#3A4250" stroke-width="2.5"/><line x1="120" y1="174" x2="113.5" y2="185.5" stroke="#3A4250" stroke-width="2.5"/><line x1="120" y1="174" x2="106.8" y2="174.0" stroke="#3A4250" stroke-width="2.5"/><line x1="120" y1="174" x2="113.4" y2="162.6" stroke="#3A4250" stroke-width="2.5"/><line x1="120" y1="174" x2="126.6" y2="162.6" stroke="#3A4250" stroke-width="2.5"/>
+    <circle cx="120" cy="174" r="3.96" fill="#2B313C"/>
+    
+    <ellipse cx="285" cy="200" rx="30" ry="6" fill="url(#shadow)"/>
+    <circle cx="285" cy="174" r="22" fill="#1C222C"/>
+    <circle cx="285" cy="174" r="13.64" fill="#8C97A6"/>
+    <line x1="285" y1="174" x2="298.2" y2="174.0" stroke="#3A4250" stroke-width="2.5"/><line x1="285" y1="174" x2="291.6" y2="185.4" stroke="#3A4250" stroke-width="2.5"/><line x1="285" y1="174" x2="278.5" y2="185.5" stroke="#3A4250" stroke-width="2.5"/><line x1="285" y1="174" x2="271.8" y2="174.0" stroke="#3A4250" stroke-width="2.5"/><line x1="285" y1="174" x2="278.4" y2="162.6" stroke="#3A4250" stroke-width="2.5"/><line x1="285" y1="174" x2="291.6" y2="162.6" stroke="#3A4250" stroke-width="2.5"/>
+    <circle cx="285" cy="174" r="3.96" fill="#2B313C"/>
+    
+  <path d="M 45 172 L 50 150 Q 53 138 78 135 L 122 102 Q 158 88 205 88 Q 250 88 278 106 L 312 135
+           Q 340 138 344 152 L 348 172 Z" fill="url(#body)"/>
+  <path d="M 135 105 L 160 94 Q 195 84 225 94 L 258 108 L 250 128 L 142 128 Z" fill="url(#glass)"/>
+  <line x1="196" y1="95" x2="196" y2="128" stroke="#000" stroke-width="2"/>
+  <path d="M 55 156 L 340 156" stroke="#FF6B35" stroke-width="2.5"/>
+  <rect x="48" y="150" width="11" height="6" rx="2" fill="#FFE9A8"/>
+  <rect x="336" y="150" width="11" height="6" rx="2" fill="#C0392B"/>
+  <circle cx="102" cy="120" r="3" fill="#000"/>
+
+  <text x="200" y="228" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+        fill="#7A5A00" text-anchor="middle" letter-spacing="2.5">LUXURY</text>
+</svg>

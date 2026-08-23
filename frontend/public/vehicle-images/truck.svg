@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240">
+  
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A82C2C"/>
+      <stop offset="55%" stop-color="#5A1414"/>
+      <stop offset="100%" stop-color="#5A1414"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#DCE9F5"/>
+      <stop offset="100%" stop-color="#A9C3DD"/>
+    </linearGradient>
+    <radialGradient id="shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00000030"/>
+      <stop offset="100%" stop-color="#00000000"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="240" fill="#EAF0F7"/>
+  <rect x="0" y="190" width="400" height="8" fill="#D6E0EC"/>
+  
+  
+    <ellipse cx="115" cy="209" rx="33" ry="6" fill="url(#shadow)"/>
+    <circle cx="115" cy="180" r="25" fill="#1C222C"/>
+    <circle cx="115" cy="180" r="15.5" fill="#8C97A6"/>
+    <line x1="115" y1="180" x2="130.0" y2="180.0" stroke="#3A4250" stroke-width="2.5"/><line x1="115" y1="180" x2="122.5" y2="193.0" stroke="#3A4250" stroke-width="2.5"/><line x1="115" y1="180" x2="107.6" y2="193.0" stroke="#3A4250" stroke-width="2.5"/><line x1="115" y1="180" x2="100.0" y2="180.0" stroke="#3A4250" stroke-width="2.5"/><line x1="115" y1="180" x2="107.5" y2="167.0" stroke="#3A4250" stroke-width="2.5"/><line x1="115" y1="180" x2="122.6" y2="167.0" stroke="#3A4250" stroke-width="2.5"/>
+    <circle cx="115" cy="180" r="4.5" fill="#2B313C"/>
+    
+    <ellipse cx="295" cy="209" rx="33" ry="6" fill="url(#shadow)"/>
+    <circle cx="295" cy="180" r="25" fill="#1C222C"/>
+    <circle cx="295" cy="180" r="15.5" fill="#8C97A6"/>
+    <line x1="295" y1="180" x2="310.0" y2="180.0" stroke="#3A4250" stroke-width="2.5"/><line x1="295" y1="180" x2="302.5" y2="193.0" stroke="#3A4250" stroke-width="2.5"/><line x1="295" y1="180" x2="287.6" y2="193.0" stroke="#3A4250" stroke-width="2.5"/><line x1="295" y1="180" x2="280.0" y2="180.0" stroke="#3A4250" stroke-width="2.5"/><line x1="295" y1="180" x2="287.5" y2="167.0" stroke="#3A4250" stroke-width="2.5"/><line x1="295" y1="180" x2="302.6" y2="167.0" stroke="#3A4250" stroke-width="2.5"/>
+    <circle cx="295" cy="180" r="4.5" fill="#2B313C"/>
+    
+  <path d="M 55 178 L 58 150 Q 60 122 88 118 L 105 90 Q 115 78 145 78 L 190 78 Q 205 78 205 95 L 205 150
+           L 340 150 L 340 178 Z" fill="url(#body)"/>
+  <rect x="215" y="128" width="118" height="22" fill="url(#body)"/>
+  <line x1="215" y1="128" x2="215" y2="150" stroke="#3A0A0A" stroke-width="2"/>
+  <path d="M 112 116 L 122 94 Q 130 86 145 86 L 180 86 Q 190 86 190 96 L 190 116 L 184 132 L 118 132 Z"
+        fill="url(#glass)"/>
+  <rect x="58" y="152" width="11" height="6" rx="2" fill="#FFE9A8"/>
+  <rect x="325" y="152" width="11" height="6" rx="2" fill="#C0392B"/>
+  <circle cx="98" cy="108" r="3" fill="#3A0A0A"/>
+
+  <text x="200" y="228" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+        fill="#7A1F1F" text-anchor="middle" letter-spacing="2.5">TRUCK</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240">
+  
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22436F"/>
+      <stop offset="55%" stop-color="#122A4D"/>
+      <stop offset="100%" stop-color="#122A4D"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#DCE9F5"/>
+      <stop offset="100%" stop-color="#A9C3DD"/>
+    </linearGradient>
+    <radialGradient id="shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00000030"/>
+      <stop offset="100%" stop-color="#00000000"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="240" fill="#EAF0F7"/>
+  <rect x="0" y="190" width="400" height="8" fill="#D6E0EC"/>
+  
+  
+    <ellipse cx="120" cy="200" rx="30" ry="6" fill="url(#shadow)"/>
+    <circle cx="120" cy="174" r="22" fill="#1C222C"/>
+    <circle cx="120" cy="174" r="13.64" fill="#8C97A6"/>
+    <line x1="120" y1="174" x2="133.2" y2="174.0" stroke="#3A4250" stroke-width="2.5"/><line x1="120" y1="174" x2="126.6" y2="185.4" stroke="#3A4250" stroke-width="2.5"/><line x1="120" y1="174" x2="113.5" y2="185.5" stroke="#3A4250" stroke-width="2.5"/><line x1="120" y1="174" x2="106.8" y2="174.0" stroke="#3A4250" stroke-width="2.5"/><line x1="120" y1="174" x2="113.4" y2="162.6" stroke="#3A4250" stroke-width="2.5"/><line x1="120" y1="174" x2="126.6" y2="162.6" stroke="#3A4250" stroke-width="2.5"/>
+    <circle cx="120" cy="174" r="3.96" fill="#2B313C"/>
+    
+    <ellipse cx="275" cy="200" rx="30" ry="6" fill="url(#shadow)"/>
+    <circle cx="275" cy="174" r="22" fill="#1C222C"/>
+    <circle cx="275" cy="174" r="13.64" fill="#8C97A6"/>
+    <line x1="275" y1="174" x2="288.2" y2="174.0" stroke="#3A4250" stroke-width="2.5"/><line x1="275" y1="174" x2="281.6" y2="185.4" stroke="#3A4250" stroke-width="2.5"/><line x1="275" y1="174" x2="268.5" y2="185.5" stroke="#3A4250" stroke-width="2.5"/><line x1="275" y1="174" x2="261.8" y2="174.0" stroke="#3A4250" stroke-width="2.5"/><line x1="275" y1="174" x2="268.4" y2="162.6" stroke="#3A4250" stroke-width="2.5"/><line x1="275" y1="174" x2="281.6" y2="162.6" stroke="#3A4250" stroke-width="2.5"/>
+    <circle cx="275" cy="174" r="3.96" fill="#2B313C"/>
+    
+  <path d="M 55 172 L 60 148 Q 63 135 85 132 L 118 105 Q 150 92 200 92 Q 245 92 270 108 L 300 132
+           Q 328 135 333 150 L 338 172 Z" fill="url(#body)"/>
+  <path d="M 130 108 L 152 96 Q 190 88 218 96 L 250 110 L 244 128 L 136 128 Z" fill="url(#glass)"/>
+  <line x1="193" y1="97" x2="193" y2="128" stroke="#0A1730" stroke-width="2"/>
+  <rect x="58" y="151" width="11" height="6" rx="2" fill="#FFE9A8"/>
+  <rect x="327" y="151" width="11" height="6" rx="2" fill="#C0392B"/>
+  <line x1="60" y1="151" x2="333" y2="151" stroke="#00000018" stroke-width="1.5"/>
+  <circle cx="105" cy="118" r="3" fill="#0A1730"/>
+
+  <text x="200" y="228" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+        fill="#122A4D" text-anchor="middle" letter-spacing="2.5">SEDAN</text>
+</svg>
