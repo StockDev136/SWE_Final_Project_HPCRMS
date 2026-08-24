@@ -39,6 +39,7 @@ export default function VehicleManagementPage() {
   const [category, setCategory] = useState<VehicleCategory>("SEDAN");
   const [formBranchId, setFormBranchId] = useState<number | "">("");
   const [dailyRate, setDailyRate] = useState("");
+  const [parkingStall, setParkingStall] = useState("");
   const [formError, setFormError] = useState("");
   const [saving, setSaving] = useState(false);
 
@@ -85,12 +86,14 @@ export default function VehicleManagementPage() {
         branchId: formBranchId,
         dailyRate: Number(dailyRate),
         imageUrl: defaultImageForCategory(category),
+        parkingStall: parkingStall.trim() || undefined,
       });
       setShowForm(false);
       setLicensePlate("");
       setMake("");
       setModel("");
       setDailyRate("");
+      setParkingStall("");
       await loadVehicles(branchFilter === "" ? undefined : branchFilter);
     } catch (err) {
       setFormError(getErrorMessage(err, "Could not add vehicle"));
@@ -202,6 +205,17 @@ export default function VehicleManagementPage() {
                 ))}
               </select>
             </div>
+            <div>
+              <label className="block text-xs font-medium text-slate-700 mb-1">
+                Parking stall <span className="text-slate-400 font-normal">(optional)</span>
+              </label>
+              <input
+                value={parkingStall}
+                onChange={(e) => setParkingStall(e.target.value)}
+                placeholder="e.g. A-12"
+                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+              />
+            </div>
           </div>
           <button
             type="submit"
@@ -245,6 +259,7 @@ export default function VehicleManagementPage() {
                 <th className="text-left px-4 py-3">Photo</th>
                 <th className="text-left px-4 py-3">Vehicle</th>
                 <th className="text-left px-4 py-3">Plate</th>
+                <th className="text-left px-4 py-3">Stall</th>
                 <th className="text-left px-4 py-3">Branch</th>
                 <th className="text-left px-4 py-3">Rate</th>
                 <th className="text-left px-4 py-3">Status</th>
@@ -267,6 +282,13 @@ export default function VehicleManagementPage() {
                     <div className="text-xs text-slate-400">{v.category}</div>
                   </td>
                   <td className="px-4 py-3 font-mono text-xs">{v.licensePlate}</td>
+                  <td className="px-4 py-3 text-xs">
+                    {v.parkingStall ? (
+                      <span className="font-semibold text-[#122A4D]">{v.parkingStall}</span>
+                    ) : (
+                      <span className="text-slate-400">Not set</span>
+                    )}
+                  </td>
                   <td className="px-4 py-3">{v.branchName}</td>
                   <td className="px-4 py-3">${v.dailyRate}/day</td>
                   <td className="px-4 py-3">

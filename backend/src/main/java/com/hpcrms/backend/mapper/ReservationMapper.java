@@ -18,4 +18,5 @@ public interface ReservationMapper {
     ReservationResponse toResponse(Reservation reservation);
 
     List<ReservationResponse> toResponseList(List<Reservation> reservations);
+
 }

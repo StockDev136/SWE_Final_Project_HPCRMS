@@ -33,4 +33,6 @@ public class CreateVehicleRequest {
     private BigDecimal dailyRate;
 
     private String imageUrl;
+
+    private String parkingStall;
 }

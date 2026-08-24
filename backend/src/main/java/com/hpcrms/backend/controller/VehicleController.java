@@ -58,6 +58,7 @@ public class VehicleController {
                 .branch(Branch.builder().id(request.getBranchId()).build())
                 .dailyRate(request.getDailyRate())
                 .imageUrl(request.getImageUrl())
+                .parkingStall(request.getParkingStall())
                 .build();
         return vehicleService.createVehicle(vehicle);
     }
@@ -72,6 +73,7 @@ public class VehicleController {
                 .branch(Branch.builder().id(request.getBranchId()).build())
                 .dailyRate(request.getDailyRate())
                 .imageUrl(request.getImageUrl())
+                .parkingStall(request.getParkingStall())
                 .build();
         return vehicleService.updateVehicle(id, updates);
     }

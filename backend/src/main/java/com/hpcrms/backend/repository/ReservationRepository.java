@@ -78,4 +78,51 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findAllForStaff(
             @Param("status") ReservationStatus status,
             @Param("branchId") Long branchId);
+
+    /** UC-10 utilization report — how many vehicles are out right now. */
+    @Query("SELECT COUNT(r) FROM Reservation r WHERE r.status = com.hpcrms.backend.entity.enums.ReservationStatus.ACTIVE_RENTAL")
+    long countActiveRentals();
+
+    @Query("""
+            SELECT r.vehicle.category, COUNT(r)
+            FROM Reservation r
+            WHERE r.status = com.hpcrms.backend.entity.enums.ReservationStatus.ACTIVE_RENTAL
+            GROUP BY r.vehicle.category
+            """)
+    List<Object[]> countActiveRentalsByCategory();
+
+    /**
+     * UC-10 branch performance report — reservation volume per branch over a
+     * date range. Deliberately excludes CANCELLED reservations: counting
+     * those as "performance" is misleading, since a cancelled reservation
+     * never became real business — a branch with a high cancellation rate
+     * would look artificially strong instead of flagging a real problem.
+     */
+    @Query("""
+            SELECT r.pickupBranch.id, r.pickupBranch.name, COUNT(r)
+            FROM Reservation r
+            WHERE r.createdAt BETWEEN :start AND :end
+            AND r.status <> com.hpcrms.backend.entity.enums.ReservationStatus.CANCELLED
+            GROUP BY r.pickupBranch.id, r.pickupBranch.name
+            """)
+    List<Object[]> countReservationsByBranch(
+            @Param("start") java.time.LocalDateTime start,
+            @Param("end") java.time.LocalDateTime end);
+
+    /**
+     * Companion to countReservationsByBranch — cancelled counts are excluded
+     * from "performance" but not hidden entirely. A branch with a high
+     * cancellation rate relative to its real reservation count is itself a
+     * meaningful signal worth surfacing, not burying.
+     */
+    @Query("""
+            SELECT r.pickupBranch.id, COUNT(r)
+            FROM Reservation r
+            WHERE r.createdAt BETWEEN :start AND :end
+            AND r.status = com.hpcrms.backend.entity.enums.ReservationStatus.CANCELLED
+            GROUP BY r.pickupBranch.id
+            """)
+    List<Object[]> countCancelledReservationsByBranch(
+            @Param("start") java.time.LocalDateTime start,
+            @Param("end") java.time.LocalDateTime end);
 }

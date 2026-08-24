@@ -28,6 +28,7 @@ export interface CreateVehiclePayload {
   branchId: number;
   dailyRate: number;
   imageUrl?: string;
+  parkingStall?: string;
 }
 
 export async function createVehicle(payload: CreateVehiclePayload): Promise<VehicleResponse> {

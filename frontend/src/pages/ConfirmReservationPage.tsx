@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { createReservation } from "../api/reservations";
 import { getErrorMessage } from "../api/errors";
 import { savePendingReservation } from "../utils/pendingReservation";
@@ -56,9 +56,13 @@ export default function ConfirmReservationPage() {
           <p className="text-slate-500 text-sm mb-4">
             Your reservation details weren&apos;t found — this can happen after a page refresh.
           </p>
-          <Link to="/vehicles" className="text-[#FF6B35] font-semibold underline">
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className="text-[#FF6B35] font-semibold underline"
+          >
             Search vehicles again
-          </Link>
+          </button>
         </div>
       </div>
     );
@@ -104,9 +108,13 @@ export default function ConfirmReservationPage() {
   return (
     <div className="min-h-screen bg-slate-50 px-4 py-10">
       <div className="max-w-lg mx-auto">
-        <Link to="/vehicles" className="text-sm text-slate-500 hover:text-slate-700">
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="text-sm text-slate-500 hover:text-slate-700"
+        >
           ← Back to search
-        </Link>
+        </button>
 
         <div className="bg-white rounded-xl shadow-sm overflow-hidden mt-4">
           <img

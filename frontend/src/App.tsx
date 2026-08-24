@@ -13,9 +13,13 @@ import EmployeeManagementPage from "./pages/EmployeeManagementPage";
 import StaffReservationsPage from "./pages/StaffReservationsPage";
 import StaffReservationDetailPage from "./pages/StaffReservationDetailPage";
 import AssistReservationPage from "./pages/AssistReservationPage";
+import ReportsPage from "./pages/ReportsPage";
+import MaintenancePage from "./pages/MaintenancePage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import StaffRoute from "./components/StaffRoute";
 import AdminRoute from "./components/AdminRoute";
+import ReportsRoute from "./components/ReportsRoute";
+import MaintenanceRoute from "./components/MaintenanceRoute";
 import Layout from "./components/Layout";
 
 export default function App() {
@@ -44,6 +48,14 @@ export default function App() {
 
             <Route element={<AdminRoute />}>
               <Route path="/staff/employees" element={<EmployeeManagementPage />} />
+            </Route>
+
+            <Route element={<ReportsRoute />}>
+              <Route path="/staff/reports" element={<ReportsPage />} />
+            </Route>
+
+            <Route element={<MaintenanceRoute />}>
+              <Route path="/staff/maintenance" element={<MaintenancePage />} />
             </Route>
           </Route>
         </Route>

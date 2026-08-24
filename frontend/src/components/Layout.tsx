@@ -8,6 +8,11 @@ export default function Layout() {
   const isStaff = user?.role !== "CUSTOMER";
   const isAdmin = user?.role === "SYSTEM_ADMINISTRATOR";
   const canAssist = user?.role !== undefined && user.role !== "CUSTOMER" && user.role !== "FINANCE_DEPARTMENT";
+  const canViewReports =
+    user?.role !== undefined &&
+    ["BRANCH_MANAGER", "FLEET_MANAGER", "FINANCE_DEPARTMENT", "SYSTEM_ADMINISTRATOR"].includes(user.role);
+  const canManageMaintenance =
+    user?.role !== undefined && ["FLEET_MANAGER", "SYSTEM_ADMINISTRATOR"].includes(user.role);
 
   function handleLogout() {
     logout();
@@ -38,9 +43,19 @@ export default function Layout() {
                 <Link to="/staff/vehicles" className="hover:text-[#FF6B35] transition">
                   Fleet
                 </Link>
+                {canManageMaintenance && (
+                  <Link to="/staff/maintenance" className="hover:text-[#FF6B35] transition">
+                    Maintenance
+                  </Link>
+                )}
                 <Link to="/staff/branches" className="hover:text-[#FF6B35] transition">
                   Branches
                 </Link>
+                {canViewReports && (
+                  <Link to="/staff/reports" className="hover:text-[#FF6B35] transition">
+                    Reports
+                  </Link>
+                )}
                 {isAdmin && (
                   <Link to="/staff/employees" className="hover:text-[#FF6B35] transition">
                     Employees

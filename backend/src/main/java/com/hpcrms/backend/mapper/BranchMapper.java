@@ -8,6 +8,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface BranchMapper {
+
     BranchResponse toResponse(Branch branch);
+
     List<BranchResponse> toResponseList(List<Branch> branches);
 }

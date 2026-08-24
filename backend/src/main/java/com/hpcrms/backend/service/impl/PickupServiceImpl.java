@@ -53,18 +53,30 @@ public class PickupServiceImpl implements PickupService {
         vehicle.setStatus(VehicleStatus.RENTED);
         vehicleRepository.save(vehicle);
 
+        String instructions;
+        if (vehicle.getParkingStall() != null && !vehicle.getParkingStall().isBlank()) {
+            instructions = "Your vehicle is ready at " + reservation.getPickupBranch().getName()
+                    + ". Go directly to stall " + vehicle.getParkingStall() + ".";
+        } else {
+            // No stall assigned yet for this vehicle — fall back to the
+            // original plate-lookup instructions rather than send the
+            // customer to a stall number that doesn't exist.
+            instructions = "Your vehicle is ready at " + reservation.getPickupBranch().getName()
+                    + ". Look for license plate " + vehicle.getLicensePlate() + ".";
+        }
+
         return PickupResponse.builder()
                 .reservationId(reservation.getId())
                 .status(reservation.getStatus())
                 .vehicleLicensePlate(vehicle.getLicensePlate())
                 .vehicleMake(vehicle.getMake())
                 .vehicleModel(vehicle.getModel())
+                .parkingStall(vehicle.getParkingStall())
                 .pickupBranchName(reservation.getPickupBranch().getName())
                 .pickupBranchAddress(reservation.getPickupBranch().getAddress())
                 .currentLatitude(vehicle.getCurrentLatitude())
                 .currentLongitude(vehicle.getCurrentLongitude())
-                .instructions("Your vehicle is ready at " + reservation.getPickupBranch().getName()
-                        + ". Look for license plate " + vehicle.getLicensePlate() + ".")
+                .instructions(instructions)
                 .build();
     }
 }

@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import type { AuthResponse } from "../types";
 import { STORAGE_KEY } from "../api/client";
+import { clearLastVehicleSearch } from "../utils/lastVehicleSearch";
 
 interface AuthUser { email: string; role: string; token: string; }
 interface AuthContextType {
@@ -30,7 +31,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(authUser));
     setUser(authUser);
   }
-  function logout() { setUser(null); }
+  function logout() {
+    setUser(null);
+    clearLastVehicleSearch();
+  }
   return (
     <AuthContext.Provider value={{ user, login, logout, isAuthenticated: !!user }}>
       {children}

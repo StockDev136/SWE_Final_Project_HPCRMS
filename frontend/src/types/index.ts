@@ -36,6 +36,8 @@ export type VehicleStatus =
   | "MAINTENANCE"
   | "UNAVAILABLE";
 
+export type MaintenanceStatus = "SCHEDULED" | "IN_PROGRESS" | "COMPLETED";
+
 export interface VehicleResponse {
   id: number;
   licensePlate: string;
@@ -47,6 +49,7 @@ export interface VehicleResponse {
   status: VehicleStatus;
   mileage: number;
   imageUrl: string | null;
+  parkingStall: string | null;
 }
 
 // ---------- Reservation ----------
@@ -122,6 +125,7 @@ export interface PickupResponse {
   vehicleLicensePlate: string;
   vehicleMake: string;
   vehicleModel: string;
+  parkingStall: string | null;
   pickupBranchName: string;
   pickupBranchAddress: string;
   currentLatitude: number | null;

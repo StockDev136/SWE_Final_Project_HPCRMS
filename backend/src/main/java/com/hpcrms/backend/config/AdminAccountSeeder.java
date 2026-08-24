@@ -5,6 +5,7 @@ import com.hpcrms.backend.entity.enums.EmployeeRole;
 import com.hpcrms.backend.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -15,8 +16,16 @@ import org.springframework.stereotype.Component;
  * to bootstrap staff account creation from. Runs every startup but is
  * idempotent — it does nothing once the seeded admin exists.
  *
- * Change this password immediately after first login, and remove or
- * disable this seeder before any real deployment.
+ * The password is intentionally NOT hardcoded here — it's read from
+ * app.admin.default-password, which has no fallback default on purpose.
+ * Set it via the ADMIN_DEFAULT_PASSWORD environment variable in production
+ * (Railway), or in your gitignored application-local.properties for local
+ * dev. If it's not set anywhere, startup fails loudly instead of silently
+ * falling back to a known, committed password.
+ *
+ * Change this password immediately after first login, and consider
+ * removing or disabling this seeder entirely once your first real admin
+ * account exists.
  */
 @Component
 @RequiredArgsConstructor
@@ -24,7 +33,9 @@ import org.springframework.stereotype.Component;
 public class AdminAccountSeeder implements CommandLineRunner {
 
     private static final String DEFAULT_ADMIN_EMAIL = "admin@hpcrms.com";
-    private static final String DEFAULT_ADMIN_PASSWORD = "Admin@12345";
+
+    @Value("${app.admin.default-password}")
+    private String defaultAdminPassword;
 
     private final EmployeeRepository employeeRepository;
     private final PasswordEncoder passwordEncoder;
@@ -39,15 +50,9 @@ public class AdminAccountSeeder implements CommandLineRunner {
                 .firstName("System")
                 .lastName("Administrator")
                 .email(DEFAULT_ADMIN_EMAIL)
-                .passwordHash(passwordEncoder.encode(DEFAULT_ADMIN_PASSWORD))
+                .passwordHash(passwordEncoder.encode(defaultAdminPassword))
                 .role(EmployeeRole.SYSTEM_ADMINISTRATOR)
                 .build();
         employeeRepository.save(admin);
-
-        log.warn("=================================================================");
-        log.warn("Seeded default admin account — CHANGE THIS PASSWORD IMMEDIATELY");
-        log.warn("  email:    {}", DEFAULT_ADMIN_EMAIL);
-        log.warn("  password: {}", DEFAULT_ADMIN_PASSWORD);
-        log.warn("=================================================================");
     }
 }

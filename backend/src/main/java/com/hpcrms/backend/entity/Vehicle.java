@@ -51,6 +51,13 @@ public class Vehicle {
     @Column(length = 255)
     private String imageUrl;
 
+    /** Free-form so it fits however each branch labels its lot — "A-12",
+     * "Row 3, Spot 8", etc. Nullable: not every seeded/legacy vehicle has
+     * one assigned yet, so pickup instructions fall back to the license
+     * plate until staff set a real stall. */
+    @Column(length = 30)
+    private String parkingStall;
+
     private Double currentLatitude;
     private Double currentLongitude;
 }

@@ -10,4 +10,5 @@ public interface RentalAgreementMapper {
 
     @Mapping(source = "reservation.id", target = "reservationId")
     RentalAgreementResponse toResponse(RentalAgreement agreement);
+
 }

@@ -18,6 +18,7 @@ public class PickupResponse {
     private String vehicleLicensePlate;
     private String vehicleMake;
     private String vehicleModel;
+    private String parkingStall;
     private String pickupBranchName;
     private String pickupBranchAddress;
     private Double currentLatitude;

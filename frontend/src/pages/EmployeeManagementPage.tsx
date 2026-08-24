@@ -6,6 +6,16 @@ import type { BranchResponse, EmployeeResponse, EmployeeRole } from "../types";
 
 const EMAIL_DOMAIN = "@hpcrms.com";
 
+function isPasswordComplex(password: string): boolean {
+  return (
+    password.length >= 8 &&
+    /[a-z]/.test(password) &&
+    /[A-Z]/.test(password) &&
+    /\d/.test(password) &&
+    /[^a-zA-Z0-9]/.test(password)
+  );
+}
+
 const ROLES: EmployeeRole[] = [
   "RENTAL_AGENT",
   "BRANCH_MANAGER",
@@ -64,6 +74,10 @@ export default function EmployeeManagementPage() {
     const trimmed = emailLocalPart.trim().toLowerCase();
     if (!trimmed) {
       setFormError("Enter a username for the employee's email");
+      return;
+    }
+    if (!isPasswordComplex(password)) {
+      setFormError("Password does not meet the complexity requirements");
       return;
     }
 
@@ -180,10 +194,29 @@ export default function EmployeeManagementPage() {
                 type="password"
                 required
                 minLength={8}
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$"
+                title="At least 8 characters, with an uppercase letter, a lowercase letter, a number, and a special character"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
               />
+              <ul className="text-xs mt-1 space-y-0.5">
+                <li className={password.length >= 8 ? "text-emerald-600" : "text-slate-400"}>
+                  ✓ At least 8 characters
+                </li>
+                <li className={/[A-Z]/.test(password) ? "text-emerald-600" : "text-slate-400"}>
+                  ✓ One uppercase letter
+                </li>
+                <li className={/[a-z]/.test(password) ? "text-emerald-600" : "text-slate-400"}>
+                  ✓ One lowercase letter
+                </li>
+                <li className={/\d/.test(password) ? "text-emerald-600" : "text-slate-400"}>
+                  ✓ One number
+                </li>
+                <li className={/[^a-zA-Z0-9]/.test(password) ? "text-emerald-600" : "text-slate-400"}>
+                  ✓ One special character
+                </li>
+              </ul>
             </div>
             <div>
               <label className="block text-xs font-medium text-slate-700 mb-1">Role</label>

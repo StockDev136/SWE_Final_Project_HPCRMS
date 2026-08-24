@@ -1,13 +1,13 @@
 import type { VehicleCategory } from "../types";
 
 const CATEGORY_IMAGE: Record<VehicleCategory, string> = {
-  ECONOMY: "/vehicle-images/economy.svg",
-  COMPACT: "/vehicle-images/compact.svg",
-  SEDAN: "/vehicle-images/sedan.svg",
-  SUV: "/vehicle-images/suv.svg",
-  TRUCK: "/vehicle-images/truck.svg",
-  LUXURY: "/vehicle-images/luxury.svg",
-  VAN: "/vehicle-images/van.svg",
+  ECONOMY: "/vehicle-images/economy.jpg",
+  COMPACT: "/vehicle-images/compact.jpg",
+  SEDAN: "/vehicle-images/sedan.jpg",
+  SUV: "/vehicle-images/suv.jpg",
+  TRUCK: "/vehicle-images/truck.jpg",
+  LUXURY: "/vehicle-images/luxury.jpg",
+  VAN: "/vehicle-images/van.jpg",
 };
 
 /** Representative image for a vehicle category — used both as the seeded

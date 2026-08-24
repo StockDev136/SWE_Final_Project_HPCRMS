@@ -56,4 +56,8 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
             @Param("endDate") LocalDate endDate,
             @Param("disabledStatuses") List<VehicleStatus> disabledStatuses,
             @Param("blockingStatuses") List<ReservationStatus> blockingStatuses);
+
+    /** UC-10 utilization report — fleet size per category. */
+    @Query("SELECT v.category, COUNT(v) FROM Vehicle v GROUP BY v.category")
+    List<Object[]> countVehiclesByCategory();
 }

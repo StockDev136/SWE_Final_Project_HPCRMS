@@ -65,7 +65,11 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
-      <div className="w-full max-w-sm bg-white rounded-xl shadow-md p-8">
+      <div className="w-full max-w-sm">
+        <Link to="/" className="inline-block mb-4 text-sm text-slate-500 hover:text-slate-700">
+          ← Back to home
+        </Link>
+        <div className="bg-white rounded-xl shadow-md p-8">
         <h1 className="text-2xl font-bold text-[#122A4D] mb-1">Welcome back</h1>
         <p className="text-slate-500 text-sm mb-6">Log in to your HPCRMS account</p>
 
@@ -118,6 +122,7 @@ export default function LoginPage() {
             Register
           </Link>
         </p>
+        </div>
       </div>
     </div>
   );

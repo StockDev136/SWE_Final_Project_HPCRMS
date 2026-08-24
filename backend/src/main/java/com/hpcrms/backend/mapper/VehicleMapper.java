@@ -14,4 +14,5 @@ public interface VehicleMapper {
     VehicleResponse toResponse(Vehicle vehicle);
 
     List<VehicleResponse> toResponseList(List<Vehicle> vehicles);
+
 }

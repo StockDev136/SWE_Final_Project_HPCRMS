@@ -22,4 +22,5 @@ public class VehicleResponse {
     private VehicleStatus status;
     private int mileage;
     private String imageUrl;
+    private String parkingStall;
 }

@@ -11,9 +11,12 @@ export interface CreateReservationPayload {
 }
 
 export async function createReservation(
-  payload: CreateReservationPayload
+  payload: CreateReservationPayload,
 ): Promise<ReservationResponse> {
-  const response = await apiClient.post<ReservationResponse>("/reservations", payload);
+  const response = await apiClient.post<ReservationResponse>(
+    "/reservations",
+    payload,
+  );
   return response.data;
 }
 
@@ -28,33 +31,64 @@ export interface AssistedReservationPayload {
 }
 
 export async function createReservationForCustomer(
-  payload: AssistedReservationPayload
+  payload: AssistedReservationPayload,
 ): Promise<ReservationResponse> {
-  const response = await apiClient.post<ReservationResponse>("/reservations/assist", payload);
+  const response = await apiClient.post<ReservationResponse>(
+    "/reservations/assist",
+    payload,
+  );
   return response.data;
 }
 
 export async function getMyReservations(): Promise<ReservationResponse[]> {
-  const response = await apiClient.get<ReservationResponse[]>("/reservations/me");
+  const response =
+    await apiClient.get<ReservationResponse[]>("/reservations/me");
   return response.data;
 }
 
 export async function getAllReservations(
   status?: ReservationStatus,
-  branchId?: number
+  branchId?: number,
 ): Promise<ReservationResponse[]> {
   const response = await apiClient.get<ReservationResponse[]>("/reservations", {
-    params: { ...(status ? { status } : {}), ...(branchId ? { branchId } : {}) },
+    params: {
+      ...(status ? { status } : {}),
+      ...(branchId ? { branchId } : {}),
+    },
   });
   return response.data;
 }
 
-export async function getReservationById(id: number): Promise<ReservationResponse> {
-  const response = await apiClient.get<ReservationResponse>(`/reservations/${id}`);
+export async function getReservationById(
+  id: number,
+): Promise<ReservationResponse> {
+  const response = await apiClient.get<ReservationResponse>(
+    `/reservations/${id}`,
+  );
   return response.data;
 }
 
-export async function cancelReservation(id: number): Promise<ReservationResponse> {
-  const response = await apiClient.delete<ReservationResponse>(`/reservations/${id}`);
+export async function cancelReservation(
+  id: number,
+): Promise<ReservationResponse> {
+  const response = await apiClient.delete<ReservationResponse>(
+    `/reservations/${id}`,
+  );
+  return response.data;
+}
+
+export interface ModifyReservationPayload {
+  startDate: string;
+  endDate: string;
+}
+
+export async function modifyReservation(
+  id: number,
+  payload: ModifyReservationPayload,
+): Promise<ReservationResponse> {
+  const response = await apiClient.put<ReservationResponse>(
+    `/reservations/${id}`,
+    payload,
+  );
   return response.data;
 }

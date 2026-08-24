@@ -64,6 +64,12 @@ export default function PickupPage() {
         <div className="mt-6 bg-emerald-50 border border-emerald-200 rounded-xl p-5">
           <h2 className="font-bold text-emerald-900 mb-1">Vehicle Released!</h2>
           <p className="text-sm text-emerald-800 mb-3">{result.instructions}</p>
+          {result.parkingStall && (
+            <div className="bg-white border-2 border-emerald-300 rounded-lg px-4 py-3 mb-4 text-center">
+              <p className="text-xs text-emerald-700 uppercase tracking-wide font-semibold mb-1">Go to Stall</p>
+              <p className="text-3xl font-bold text-[#122A4D]">{result.parkingStall}</p>
+            </div>
+          )}
           <dl className="text-sm text-emerald-900 space-y-1">
             <div className="flex justify-between">
               <dt className="text-emerald-700">Vehicle</dt>

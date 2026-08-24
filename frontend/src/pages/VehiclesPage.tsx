@@ -4,6 +4,7 @@ import { getBranches } from "../api/branches";
 import { searchVehicles } from "../api/vehicles";
 import { getErrorMessage } from "../api/errors";
 import { defaultImageForCategory } from "../utils/vehicleImages";
+import { getLastVehicleSearch, saveLastVehicleSearch } from "../utils/lastVehicleSearch";
 import type { BranchResponse, VehicleCategory, VehicleResponse } from "../types";
 
 const CATEGORIES: VehicleCategory[] = [
@@ -65,9 +66,32 @@ export default function VehiclesPage() {
     getBranches()
       .then((data) => {
         setBranches(data);
-        if (data.length > 0) setBranchId(data[0].id);
+        const saved = getLastVehicleSearch();
+        if (saved && data.some((b) => b.id === saved.branchId)) {
+          setBranchId(saved.branchId);
+          setStartDate(saved.startDate);
+          setEndDate(saved.endDate);
+          setPickupTime(saved.pickupTime);
+          setReturnTime(saved.returnTime);
+          setDropoffBranchId(saved.dropoffBranchId ?? "");
+          // Only auto-rerun if the saved dates haven't already passed —
+          // otherwise fall through and just leave the fields populated for
+          // the customer to adjust, rather than searching a stale/invalid range.
+          if (saved.startDate >= todayIso()) {
+            runSearch({
+              branchId: saved.branchId,
+              startDate: saved.startDate,
+              endDate: saved.endDate,
+              pickupTime: saved.pickupTime,
+              returnTime: saved.returnTime,
+            });
+          }
+        } else if (data.length > 0) {
+          setBranchId(data[0].id);
+        }
       })
       .catch(() => setError("Could not load branches"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // If we just arrived here after an auto-reservation attempt failed (e.g.
@@ -81,6 +105,29 @@ export default function VehiclesPage() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  async function runSearch(params: {
+    branchId: number;
+    startDate: string;
+    endDate: string;
+    pickupTime: string;
+    returnTime: string;
+  }) {
+    setError("");
+    setSearching(true);
+    setSearched(false);
+    setCategoryFilter("ALL");
+    setDisplayCount(10);
+    try {
+      const results = await searchVehicles(params.branchId, params.startDate, params.endDate);
+      setVehicles(results);
+      setSearched(true);
+    } catch (err) {
+      setError(getErrorMessage(err, "Search failed"));
+    } finally {
+      setSearching(false);
+    }
+  }
 
   async function handleSearch(e: React.FormEvent) {
     e.preventDefault();
@@ -97,20 +144,15 @@ export default function VehiclesPage() {
       setError("Pickup time cannot be in the past");
       return;
     }
-    setError("");
-    setSearching(true);
-    setSearched(false);
-    setCategoryFilter("ALL");
-    setDisplayCount(10);
-    try {
-      const results = await searchVehicles(branchId, startDate, endDate);
-      setVehicles(results);
-      setSearched(true);
-    } catch (err) {
-      setError(getErrorMessage(err, "Search failed"));
-    } finally {
-      setSearching(false);
-    }
+    saveLastVehicleSearch({
+      branchId,
+      startDate,
+      endDate,
+      pickupTime,
+      returnTime,
+      dropoffBranchId: dropoffBranchId === "" ? undefined : dropoffBranchId,
+    });
+    await runSearch({ branchId, startDate, endDate, pickupTime, returnTime });
   }
 
   function handleReserve(vehicle: VehicleResponse) {

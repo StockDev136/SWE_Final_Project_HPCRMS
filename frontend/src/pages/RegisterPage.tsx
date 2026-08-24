@@ -6,6 +6,16 @@ import { getErrorMessage } from "../api/errors";
 import { useAuth } from "../context/AuthContext";
 import { clearPendingReservation, getPendingReservation } from "../utils/pendingReservation";
 
+function isPasswordComplex(password: string): boolean {
+  return (
+    password.length >= 8 &&
+    /[a-z]/.test(password) &&
+    /[A-Z]/.test(password) &&
+    /\d/.test(password) &&
+    /[^a-zA-Z0-9]/.test(password)
+  );
+}
+
 export default function RegisterPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -22,6 +32,12 @@ export default function RegisterPage() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError("");
+
+    if (!isPasswordComplex(password)) {
+      setError("Password does not meet the complexity requirements");
+      return;
+    }
+
     setLoading(true);
     try {
       const data = await register({ firstName, lastName, email, phone, password });
@@ -64,7 +80,11 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4 py-8">
-      <div className="w-full max-w-sm bg-white rounded-xl shadow-md p-8">
+      <div className="w-full max-w-sm">
+        <Link to="/" className="inline-block mb-4 text-sm text-slate-500 hover:text-slate-700">
+          ← Back to home
+        </Link>
+        <div className="bg-white rounded-xl shadow-md p-8">
         <h1 className="text-2xl font-bold text-[#122A4D] mb-1">Create your account</h1>
         <p className="text-slate-500 text-sm mb-6">Join HPCRMS to start renting</p>
 
@@ -127,11 +147,29 @@ export default function RegisterPage() {
               type="password"
               required
               minLength={8}
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$"
+              title="At least 8 characters, with an uppercase letter, a lowercase letter, a number, and a special character"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B35]"
             />
-            <p className="text-xs text-slate-400 mt-1">At least 8 characters</p>
+            <ul className="text-xs mt-1 space-y-0.5">
+              <li className={password.length >= 8 ? "text-emerald-600" : "text-slate-400"}>
+                ✓ At least 8 characters
+              </li>
+              <li className={/[A-Z]/.test(password) ? "text-emerald-600" : "text-slate-400"}>
+                ✓ One uppercase letter
+              </li>
+              <li className={/[a-z]/.test(password) ? "text-emerald-600" : "text-slate-400"}>
+                ✓ One lowercase letter
+              </li>
+              <li className={/\d/.test(password) ? "text-emerald-600" : "text-slate-400"}>
+                ✓ One number
+              </li>
+              <li className={/[^a-zA-Z0-9]/.test(password) ? "text-emerald-600" : "text-slate-400"}>
+                ✓ One special character
+              </li>
+            </ul>
           </div>
           <button
             type="submit"
@@ -148,6 +186,7 @@ export default function RegisterPage() {
             Log in
           </Link>
         </p>
+        </div>
       </div>
     </div>
   );
